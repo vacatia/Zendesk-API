@@ -67,14 +67,14 @@ class zendesk
 			default:
 				break;
 		}
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json', 'Accept: application/json'));
 		curl_setopt($ch, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
 		$output = curl_exec($ch);
 		curl_close($ch);
-		$decoded = json_decode($output);
+		$decoded = json_decode($output, true);
 
 		return is_null($decoded) ? $output : $decoded;
 	}

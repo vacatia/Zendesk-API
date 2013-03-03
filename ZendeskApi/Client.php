@@ -1,19 +1,18 @@
 <?php
 /**
+ * Class definition for ZendeskApi\Client
+ */
+namespace ZendeskApi;
+/**
   * A minimal Zendesk API PHP implementation
-  *
   * @package Zendesk
-  *
   * @author  Julien Renouard <renouard.julien@gmail.com> (deeply inspired by Darren Scerri <darrenscerri@gmail.com> Mandrill's implemetation)
-  *
   * @version 1.0
-  *
   */
-class zendesk
+class Client
 {
 	/**
 	 * API Constructor. If set to test automatically, will return an Exception if the ping API call fails
-	 *
 	 * @param string $apiKey API Key.
 	 * @param string $user Username on Zendesk.
 	 * @param string $subDomain Your subdomain on zendesk, without https:// nor trailling dot.
@@ -28,17 +27,15 @@ class zendesk
 		$this->suffix  = $suffix;
 		if ($test === true && !$this->test())
 		{
-			throw new Exception('Cannot connect or authentice with the Zendesk API');
+			throw new \Exception('Cannot connect or authentice with the Zendesk API');
 		}
 	}
 	
 	/**
 	 * Perform an API call.
-	 *
 	 * @param string $url='/tickets' Endpoint URL. Will automatically add the suffix you set if necessary (both '/tickets.json' and '/tickets' are valid)
 	 * @param array $json=array() An associative array of parameters
 	 * @param string $action Action to perform POST/GET/PUT
-	 *
 	 * @return mixed Automatically decodes JSON responses. If the response is not JSON, the response is returned as is
 	 */
 	public function call($url, $json, $action)
@@ -81,7 +78,6 @@ class zendesk
 	
 	/**
 	 * Tests the API using /users/ping
-	 *
 	 * @return bool Whether connection and authentication were successful
 	 */
 	public function test()

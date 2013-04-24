@@ -1,0 +1,9 @@
+{
+    "name": "malwarebytes/zendesk-api",
+    "type": "library",
+    "description": "API to connect PHP with Zendesk",
+    "homepage": "https://github.com/Malwarebytes/Zendesk-API",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}

@@ -15,15 +15,19 @@ class Client
 	 * API Constructor. If set to test automatically, will return an Exception if the ping API call fails
 	 * @param string $apiKey API Key.
 	 * @param string $user Username on Zendesk.
-	 * @param string $subDomain Your subdomain on zendesk, without https:// nor trailling dot.
+	 * @param string $domain Your subdomain on zendesk or domain mask, without https:// nor trailling dot.
 	 * @param string $suffix .json by default.
 	 * @param bool $test=true Whether to test API connectivity on creation.
 	 */
-	public function __construct($apiKey, $user, $subDomain, $suffix = '.json', $test = false)
+	public function __construct($apiKey, $user, $domain, $suffix = '.json', $test = false)
 	{
 		$this->api_key = $apiKey;
 		$this->user    = $user;
-		$this->base    = 'https://' . $subDomain . '.zendesk.com/api/v2';
+		if (strpos($domain, '.') === false) {
+			$this->base = 'https://' . $domain . '.zendesk.com/api/v2';
+		} else {
+			$this->base = 'https://' . $domain . '/api/v2';
+		}
 		$this->suffix  = $suffix;
 		if ($test === true && !$this->test())
 		{

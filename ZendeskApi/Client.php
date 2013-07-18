@@ -70,6 +70,10 @@ class Client
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
 		$output = curl_exec($ch);
+
+		if ($output === false) {
+		    throw new \Exception(curl_error($ch), curl_errno($ch));
+		}
 		curl_close($ch);
 		$decoded = json_decode($output, true);
 

@@ -65,7 +65,12 @@ class Client
 			case "PUT":
 				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-			default:
+                break;
+            case "DELETE":
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                break;
+			default: // we should probably merge POST/PUT/DELETE in the default case
 				break;
 		}
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json', 'Accept: application/json'));
